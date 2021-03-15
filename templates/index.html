@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<body style="padding:2em">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
+  <script src="semantic/dist/semantic.min.js"></script>
+  <script src="ranker_data.js"></script>
+  <script src="index.js"></script>
+
+<style>
+  .ui.label:hover{
+    background: var(--third-black) !important;
+  }
+  .ui.label{
+    background: none;
+  }
+  :root {
+    --third-black: rgb(0, 0, 0);
+    --main-black: rgb(37, 37, 37);
+    --second-black: rgb(50, 50, 70);
+    --main-white: rgb(223, 223, 223);
+    --second-white: rgb(223, 226, 255);
+  }
+  .ui.selection.dropdown .menu>.item:hover{
+    background: var(--second-black) !important;
+  }
+  .ui.selection.active.dropdown .menu{
+    border-color: var(--main-white) !important;
+  }
+  .ui.selection.active.dropdown:hover .menu{
+    border-color: var(--main-white) !important;
+  }
+  .ui.selection.dropdown{
+    border-color: var(--main-white) !important;
+  }
+  * {
+    font-family: 'Nunito', sans-serif;
+    font-size: 17px;
+  }
+  .menu,.header,.item,.button,.dropdown{
+    background: var(--main-black) !important;
+    color: var(--main-white) !important;
+  }
+  .news_category_root{
+    margin-top: 1em
+  }
+  .news_category{
+    color:rgb(223, 223, 223);
+  }
+  .query_menu{
+    display: flex;
+  }
+  a:visited{
+    color: rgb(128, 128, 128) !important;
+  }
+  a:active{
+    color: rgb(190, 190, 190) !important;
+  }
+  a{
+    color: rgb(219, 219, 219) !important;
+  }
+  .table{
+    background: rgb(20, 20, 20) !important;
+    color:rgb(169, 153, 177) !important;
+  }
+  .mini_button{
+    cursor: pointer;
+    border:none;
+    border-width: 1px;
+    border-color: white;
+    background: none;
+    color: white;
+  }
+  .btn_ico{
+    background: black;
+    height: 24px;
+  }
+  .button_group{
+    display: flex;
+  }
+  .nav_bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 100%;
+  }
+  body{
+    background: black;
+  }
+</style>
+
+<div>
+  <p style="color:white">
+    News
+  </p>
+</div>
+
+<div class="nav_bar">
+  <div class="button_group">
+    <!-- <button class="mini_button">
+      <img class="btn_ico" src="twitter.png">
+      <p>contact</p>
+    </button> -->
+    <!-- <button class="mini_button">
+      <img class="btn_ico" src="github.png">
+      <p>contribute</p>
+    </button> -->
+  </div>
+  <div class="query_menu">
+    <div class="field">
+      <div id="fetch_ammount_dropdown" class="ui floating labeled icon dropdown button">
+        <i class="copy icon"></i>
+        <span class="text">Size</span>
+        <div class="menu">
+          <div data-value="5" class="item">
+            5
+          </div>
+          <div data-value="10" class="item">
+            10
+          </div>
+          <div data-value="50" class="item">
+            50
+          </div>
+          <div data-value="100" class="item">
+            100
+          </div>
+        </div>
+      </div>
+
+      <div id="rank_algorithm_dropdown" class="ui floating labeled icon dropdown button">
+        <i class="sort numeric down icon"></i>
+        <span class="text">Sort By</span>
+        <div id="rank_dropdown_menu" class="menu">
+        </div>
+      </div>
+      <button onclick="api_get_news('field');" class="ui  button">
+        Apply
+      </button>
+    </div>
+  </div>
+</div> 
+
+  <div id="category_dropdown" class="ui fluid multiple search selection dropdown">
+  <input type="hidden" name="category">
+  <i class="dropdown icon"></i>
+  <div class="default text">Add Categories</div>
+    <div class="menu">
+      <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
+      <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+      <div class="item" data-value="al"><i class="al flag"></i>Albania</div>
+    </div>  
+  </div>  
+
+  <div id="category-prot" class="news_category_root" style="display: none;">
+    <div class="news_category">
+    </div>   
+    <table class="ui segment striped  inverted table">
+      <tbody class="table_body">
+      </tbody>
+    </table>
+  </div>
+  <div id="content_h">
+
+  </div>
+  <!-- <div class="ui top attached tabular menu">
+    <a class="item" data-tab="genetics">genetics</a>
+    <a class="item" data-tab="neuroscience">Second</a>
+    <a class="item active" data-tab="smart drugs">smart drugs</a>
+  </div>
+  <div class="ui bottom attached tab segment" data-tab="genetics">
+    genetics
+  </div>
+  <div class="ui bottom attached tab segment" data-tab="neuroscience">
+    neuroscience
+  </div>
+  <div class="ui bottom attached tab segment active" data-tab="smart drugs">
+    smart drugs
+  </div> -->
+
+</body>
+</html>

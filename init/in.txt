@@ -1,0 +1,5 @@
+https://blog.feedspot.com/dna_blogs/,genetics
+https://blog.feedspot.com/genetics_rss_feeds/,genetics
+https://blog.feedspot.com/neuroscience_blogs/,neuroscience
+https://blog.feedspot.com/neuroscience_podcasts/,neuroscience
+https://blog.feedspot.com/chemistry_websites/,chemistry

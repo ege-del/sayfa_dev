@@ -1,0 +1,6 @@
+sayfa_dev_env
+git_exclude
+__pycache__
+.vscode
+static/semantic/*
+run.sh

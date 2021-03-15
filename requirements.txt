@@ -1,0 +1,16 @@
+#xpath operations
+lxml
+
+#rss feeds
+feedparser
+
+pymongo
+requests
+flask
+
+#get domain name from url
+tldextract
+
+
+#date formatting
+python-dateutil
