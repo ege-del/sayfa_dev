@@ -98,8 +98,8 @@ function gen_category(target_dom,category){
     query_url.set('rank_algorithm',q_rank_algorithm);
 
     setCookie('category',q_category,365);
-    setCookie('fetch',q_category,365);
-    setCookie('rank_algorithm',q_category,365);
+    setCookie('fetch',q_fetch,365);
+    setCookie('rank_algorithm',q_rank_algorithm,365);
 
     window.history.pushState('Query','','news?'+query_url.toString());
   
