@@ -31,21 +31,32 @@ def category():
 def news():
     #TODO fix
     # this is not using info from config.py
+    print(request.args)
     query_date_range = datetime.datetime.today()  - datetime.timedelta(days=7)
-
     news = collection[config.COL_NEWS_CONTENT]
-    data_bundle = {}
+    sort_by = 'rank.'+request.args['rank_algorithm']
+    sort_order = pymongo.DESCENDING if request.args['reverse_order'] == "yes" else pymongo.ASCENDING
+    fetch = int(request.args['fetch'])
 
-    print('\n',request.args['category'].split(','))
+    query = {
+            #find
+            'date':
+                {'$gte'             : query_date_range},
+                'domain'            : {'$exists': 1},
+                'date'              : {'$exists': 1},
+                "ranked_document"   : True
+            }
+    project = {
+            '_id': 0,
+            'subtitle': 0
+            }
+    
+    data_bundle = {}
     for i in request.args['category'].split(','):
-        print(i)
-        print('LIMIT BY',int(request.args['fetch']))
-        print({'date':{'$gte':query_date_range},'domain': {'$exists': 1}, 'date': {'$exists': 1}, "category": i, "ranked_document": True})
-        res = list(news.find({'date':{'$gte':query_date_range},'domain': {'$exists': 1}, 'date': {'$exists': 1}, "category": i, "ranked_document": True}, {
-                   '_id': 0}).sort('rank.'+request.args['rank_algorithm']).limit(int(request.args['fetch'])))
-        print('RES ',res)
-        if len(res) > 0:
-            data_bundle[i] = res
+        query['category'] = i
+        res = news.find(query,project).sort(sort_by,sort_order).limit(fetch)
+        print(res)
+        data_bundle[i] = list(res)
 
     # data = rank_manager.algos[request.args['rank_algorithm']](data_bundle)
     return {"data": data_bundle}

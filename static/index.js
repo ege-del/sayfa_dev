@@ -44,7 +44,7 @@ function gen_category(target_dom,category){
   function gen_news_dom(data){
     return `
     <tr>
-      <td class="top aligned collapsing">${data.organization}</td>
+      <td class="top aligned collapsing">${data.domain}</td>
       <td><a href="${data.url}">${data.title}</a></td>
       <td class="top aligned collapsing">${format_date(data.date)}</td>
     </tr>
@@ -69,40 +69,56 @@ function gen_category(target_dom,category){
   let q_category = "";
   let q_fetch = "";
   let q_rank_algorithm = "";
+  let q_reverse_order = "";
 
   function api_get_news(q_type,data = null){
     if(q_type == "url"){
         q_category        =  urlParams.get('category');
         q_fetch           =  urlParams.get('fetch');
         q_rank_algorithm  =  urlParams.get('rank_algorithm');
+        q_reverse_order   =  urlParams.get('reverse_order');
     }else if(q_type == 'direct'){
         q_category        = data[0];
         q_fetch           = data[1];
         q_rank_algorithm  = data[2];
+        q_reverse_order   = data[3];
     }else if(q_type == 'field'){
         q_category        = $("#category_dropdown").dropdown('get value');
         q_fetch           = $('#fetch_ammount_dropdown').dropdown('get value');
         q_rank_algorithm  = $('#rank_algorithm_dropdown').dropdown('get value');
+        q_reverse_order   = $('#reverse_checkbox').checkbox('is checked') == true ? "yes" : "no";
+        console.log(q_reverse_order);
     }else{
         throw Error('unknown type')
     }
 
+    // force sync. maybe dumb...
     $("#category_dropdown").dropdown('set selected',q_category.split(','));
     $('#fetch_ammount_dropdown').dropdown('set selected',q_fetch);
     $('#rank_algorithm_dropdown').dropdown('set selected',q_rank_algorithm);
+    
+    if(q_reverse_order == "yes"){
+      $('#reverse_checkbox').checkbox('set checked');
+    }else{
+      $('#reverse_checkbox').checkbox('set unchecked');
+    }
+ 
 
     let query_url = new URLSearchParams();
         
     query_url.set('category',q_category);
     query_url.set('fetch',q_fetch);
     query_url.set('rank_algorithm',q_rank_algorithm);
+    query_url.set('reverse_order',q_reverse_order);
 
     setCookie('category',q_category,365);
     setCookie('fetch',q_fetch,365);
     setCookie('rank_algorithm',q_rank_algorithm,365);
+    setCookie('reverse_order',q_reverse_order,365);
+    
 
     window.history.pushState('Query','','news?'+query_url.toString());
-  
+    
     $('#content_h').empty();
     $.ajax({
           type: "GET",
@@ -172,10 +188,11 @@ $(document).ready(function() {
           let a = getCookie('category');
           let b = getCookie('fetch');
           let c = getCookie('rank_algorithm');
-            if(a && b && c){
-              api_get_news('direct',[a,b,c]);
+          let d = getCookie('reverse_order');
+            if(a && b && c && d){
+              api_get_news('direct',[a,b,c,d]);
             }else{
-              api_get_news('direct',['genetics,neuroscience',"5","newest"]);
+              api_get_news('direct',['genetics,neuroscience',"5","newest","yes"]);
             }
         }else{
             api_get_news('url');

@@ -77,6 +77,9 @@
     background: none;
     color: white;
   }
+  .checkbox > label{
+    color: var(--main-white) !important;
+  }
   .btn_ico{
     background: black;
     height: 24px;
@@ -141,6 +144,10 @@
         <div id="rank_dropdown_menu" class="menu">
         </div>
       </div>
+      <div id="reverse_checkbox" class="ui checkbox">
+        <input type="checkbox" name="example">
+        <label>Reverse</label>
+      </div>
       <button onclick="api_get_news('field');" class="ui  button">
         Apply
       </button>
@@ -153,9 +160,6 @@
   <i class="dropdown icon"></i>
   <div class="default text">Add Categories</div>
     <div class="menu">
-      <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
-      <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
-      <div class="item" data-value="al"><i class="al flag"></i>Albania</div>
     </div>  
   </div>  
 
