@@ -5,7 +5,6 @@ this script turns the page into rss links and inserts it to mongo
 import requests
 from lxml import html
 import sys
-import sys
 import os
 sys.path.insert(1, os.path.join(sys.path[0], '../'))
 import config

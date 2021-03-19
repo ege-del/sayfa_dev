@@ -12,6 +12,7 @@ def validate_link(link):
 
     return True
 
+# wip
 def match(text,word_array):
     matched = []
     matches = 0
