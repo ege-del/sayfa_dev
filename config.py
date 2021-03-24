@@ -20,7 +20,7 @@ CATEGORY_PATH_LIST = [
 
 #this value determines ranking range(comparing pool) and also what we serve
 #week-start,debug are the only implemented presets
-RANK_DATE_EPOCH = "week-start"
+RANK_DATE_EPOCH = "debug"
 
 MONGO_URL = "mongodb://localhost:27017/"
 

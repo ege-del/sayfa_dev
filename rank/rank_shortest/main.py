@@ -1,15 +1,15 @@
 
-def shortest_rank(data):
+def rank_shortest(data):
     return len(data['title'])
 
 
-def rank(data:dict) -> dict:
+def rank(cateogry: str,data:dict) -> dict:
 
-    for i in data.keys():
-        data[i].sort(key=shortest_rank)
-        index = 0
-        for x in data[i]:
-            x['rank'] = index
-            index += 1
+    data.sort(key=rank_shortest)
+    index = 0
+    for i in data:
+        i['ranker_name'] = "shortest"
+        i['rank'] = index
+        index += 1
 
     return data
