@@ -6,9 +6,6 @@ def rand_hash():
     return "%16x" % random.getrandbits(64)
 
 def format_date(date : str):
-    return date_parse(date).time()
-
-def format_date(date : str):
     if date == None:
         return None
     return date_parse(date)
