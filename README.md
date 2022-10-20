@@ -8,7 +8,6 @@ this app is in it's early stages and everything below is WIP.
 This project aims to create a platform to develop ranking algorithms for news
 i tried to maximize modularity to keep modifications easy
 
-I'm also hoping to share the database once the dev cycle settles
 
 currently it only keeps track of scientific news but its trivial to add new news targets.
 
