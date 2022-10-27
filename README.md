@@ -1,6 +1,6 @@
 # Warning !
 ```
-this app is in it's early stages and everything below is WIP.
+WIP
 ``` 
 
 # Intro
